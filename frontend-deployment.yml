@@ -20,7 +20,7 @@ spec:
       containers:
       - name: frontend
 
-        image: swapnil2811/taskmanager-frontend:v1
+        image: swapnil2811/taskmanager-frontend:v3
 
         ports:
         - containerPort: 80
