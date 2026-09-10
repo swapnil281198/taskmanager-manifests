@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: taskmanager
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+      - name: backend
+
+        image: swapnil2811/taskmanager-backend:v3
+
+        ports:
+        - containerPort: 5000
+
+        env:
+        - name: MONGO_URI
+          value: mongodb://mongo:27017/taskmanager
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: taskmanager
+
+spec:
+  selector:
+    app: backend
+
+  ports:
+  - port: 5000
+    targetPort: 5000
+
+  type: ClusterIP
